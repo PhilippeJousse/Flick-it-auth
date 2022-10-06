@@ -7,7 +7,6 @@
 >- Objects list
 >- AI (Object recognition)
 >- Ranking system
->- Feedback
 
 ---
 ## **V2**
