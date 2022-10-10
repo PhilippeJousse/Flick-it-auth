@@ -2,12 +2,12 @@
 
 ## **V1**
 ---
->- Accounts
->- Notification
->- Objects list
->- AI (Object recognition)
->- Ranking system
->- Analytics
+>- Accounts (Firebase Realtime Database)
+>- Notification (firebase cloud messaging)
+>- Objects list (set a table of the objects list into the database)
+>- AI (Object recognition using Google Vision
+>- Ranking system (
+>- Analytics (Firebase metrics)
 
 ---
 ## **V2**
