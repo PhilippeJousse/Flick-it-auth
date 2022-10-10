@@ -7,6 +7,7 @@
 >- Objects list
 >- AI (Object recognition)
 >- Ranking system
+>- Analytics
 
 ---
 ## **V2**
