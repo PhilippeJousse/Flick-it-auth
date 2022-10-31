@@ -31,7 +31,7 @@ class UserLogin(BaseModel):
     login:str
     password:str
 
-@app.post('/register')
+@app.post('/v1/register')
 async def register(user:User):
     try:
         user = auth.create_user_with_email_and_password(user.mail,user.password)
@@ -40,7 +40,7 @@ async def register(user:User):
     except:
         return 400
 
-@app.post('/login')
+@app.post('/v1/login')
 async def login(user:UserLogin):
     try:    
         user = auth.sign_in_with_email_and_password(user.login,user.password)
@@ -52,7 +52,7 @@ async def login(user:UserLogin):
     except:
         return 400
 
-@app.post('/tokenLogin')
+@app.post('/v1/tokenLogin')
 async def tokenLogin(token:str):
     try:
         auth.sign_in_with_custom_token(token)
@@ -60,7 +60,7 @@ async def tokenLogin(token:str):
     except:
         return 400
 
-@app.post('/forgotpwd')
+@app.post('/v1/forgotpwd')
 async def forgetpwd(mail:str):
     try:
         auth.send_password_reset_email(mail)
