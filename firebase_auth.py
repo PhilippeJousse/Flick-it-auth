@@ -67,7 +67,3 @@ async def forgetpwd(mail:str):
         return 200
     except:
         return 400
-
-@app.get("/v1/test")
-async def hello():
-    return "Hello FDP"
