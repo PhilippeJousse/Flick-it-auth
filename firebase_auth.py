@@ -3,7 +3,6 @@ from fastapi import FastAPI
 from fastapi.encoders import jsonable_encoder
 from fastapi.responses import JSONResponse
 from pydantic import BaseModel
-import json
 
 config = {
   'apiKey': "AIzaSyBnz6wws3EjTRnFOG7NvefKSr9CsaOlcxY",
