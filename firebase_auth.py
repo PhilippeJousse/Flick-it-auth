@@ -1,23 +1,22 @@
 import pyrebase
 from fastapi import FastAPI
-from fastapi.encoders import jsonable_encoder
-from fastapi.responses import JSONResponse
 from pydantic import BaseModel
 
-config = {
-  'apiKey': "AIzaSyBnz6wws3EjTRnFOG7NvefKSr9CsaOlcxY",
-  'authDomain': "flick-it-users-storage.firebaseapp.com",
-  'projectId': "flick-it-users-storage",
-  'storageBucket': "flick-it-users-storage.appspot.com",
-  'messagingSenderId': "1046722019798",
-  'appId': "1:1046722019798:web:905b021820e1922f95a477",
-  'measurementId': "G-J3T9K8WPV2",
-  'databaseURL':"",
-  'serviceAccount': 'serviceAccountCredentials.json'
+firebaseConfig = {
+  "apiKey": "AIzaSyBnz6wws3EjTRnFOG7NvefKSr9CsaOlcxY",
+  "authDomain": "flick-it-users-storage.firebaseapp.com",
+  "databaseURL": "https://flick-it-users-storage-default-rtdb.europe-west1.firebasedatabase.app",
+  "projectId": "flick-it-users-storage",
+  "storageBucket": "flick-it-users-storage.appspot.com",
+  "messagingSenderId": "1046722019798",
+  "appId": "1:1046722019798:web:905b021820e1922f95a477",
+  "measurementId": "G-J3T9K8WPV2",
+  "serviceAccount": "serviceAccountCredentials.json"
 }
 
-firebase = pyrebase.initialize_app(config)
+firebase = pyrebase.initialize_app(firebaseConfig)
 auth = firebase.auth()
+db = firebase.database()
 
 app = FastAPI()
 
@@ -33,8 +32,9 @@ class UserLogin(BaseModel):
 @app.post('/v1/register')
 async def register(user:User):
     try:
-        user = auth.create_user_with_email_and_password(user.mail,user.password)
-        auth.send_email_verification(user['idToken'])
+        userCreation = auth.create_user_with_email_and_password(user.mail,user.password)
+        auth.send_email_verification(userCreation['idToken'])
+        db.child("users").child(user.username).set({"username":user.username,"mail":user.mail,"totalPoint":0})
         return 200
     except:
         return 400
