@@ -1,18 +1,8 @@
-import pyrebase
+import pyrebase,json
 from fastapi import FastAPI
 from pydantic import BaseModel
 
-firebaseConfig = {
-  "apiKey": "AIzaSyBnz6wws3EjTRnFOG7NvefKSr9CsaOlcxY",
-  "authDomain": "flick-it-users-storage.firebaseapp.com",
-  "databaseURL": "https://flick-it-users-storage-default-rtdb.europe-west1.firebasedatabase.app",
-  "projectId": "flick-it-users-storage",
-  "storageBucket": "flick-it-users-storage.appspot.com",
-  "messagingSenderId": "1046722019798",
-  "appId": "1:1046722019798:web:905b021820e1922f95a477",
-  "measurementId": "G-J3T9K8WPV2",
-  "serviceAccount": "serviceAccountCredentials.json"
-}
+firebaseConfig = json.load(open("firebaseConfig.json"))
 
 firebase = pyrebase.initialize_app(firebaseConfig)
 auth = firebase.auth()
