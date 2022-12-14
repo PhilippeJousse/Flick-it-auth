@@ -2,9 +2,11 @@ import pyrebase,json
 from fastapi import FastAPI
 from pydantic import BaseModel
 
-firebaseConfig = json.load(open("firebaseConfig.json"))
+with open('firebaseConfig.json') as f:
+    firebaseConfig = f.read()
+    firebaseConfigContent = json.loads(firebaseConfig)
 
-firebase = pyrebase.initialize_app(firebaseConfig)
+firebase = pyrebase.initialize_app(firebaseConfigContent)
 auth = firebase.auth()
 db = firebase.database()
 
